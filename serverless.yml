@@ -33,6 +33,34 @@ provider:
     # metrics: true # Enable if you need
     cors: true
 
+  # Add VPC configuration for RDS access
+  vpc:
+    securityGroupIds:
+      - sg-xxxxxxxxxxxxxxxxx # Replace with your security group ID
+    subnetIds:
+      - subnet-xxxxxxxxxxxxxxxxx # Replace with your subnet IDs
+      - subnet-xxxxxxxxxxxxxxxxx
+
+  # Add IAM role statements for RDS access
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - rds-db:connect
+            - rds:*
+          Resource:
+            - arn:aws:rds:${self:provider.region}:*:db:*
+            - arn:aws:rds:${self:provider.region}:*:cluster:*
+        - Effect: Allow
+          Action:
+            - ec2:CreateNetworkInterface
+            - ec2:DescribeNetworkInterfaces
+            - ec2:DeleteNetworkInterface
+            - ec2:DescribeInstances
+            - ec2:AttachNetworkInterface
+          Resource: "*"
+
 functions:
   app:
     handler: src/handler.handler

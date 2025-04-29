@@ -1,14 +1,24 @@
 import 'express-async-errors';
 
-import { PrismaClient } from '@prisma/client';
 import express, { json } from 'express';
 import helmet from 'helmet';
+
+import sequelize from './config/database';
+import User from './models/User';
 
 const app = express();
 app.use(json());
 app.use(helmet());
 
-const prisma = new PrismaClient();
+// Initialize database connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+  })
+  .catch((error: Error) => {
+    console.error('Unable to connect to the database:', error);
+  });
 
 app.get('/', (_, res) => {
   res.json({
@@ -16,11 +26,9 @@ app.get('/', (_, res) => {
   });
 });
 
-app.get('/prisma', async (_, res) => {
-  await prisma.user.create({
-    data: {
-      email: 'random@example.com',
-    },
+app.get('/sequelize', async (_, res) => {
+  await User.create({
+    email: 'random@example.com',
   });
 
   res.json({
