@@ -5,6 +5,7 @@ import helmet from 'helmet';
 
 import sequelize from './config/database';
 import User from './models/User';
+import logger from './utils/logger';
 
 const app = express();
 app.use(json());
@@ -13,11 +14,9 @@ app.use(helmet());
 // Initialize database connection
 sequelize
   .authenticate()
-  .then(() => {
-    console.log('Database connection has been established successfully.');
-  })
+  .then(() => {})
   .catch((error: Error) => {
-    console.error('Unable to connect to the database:', error);
+    logger.error('Unable to connect to the database:', error);
   });
 
 app.get('/', (_, res) => {

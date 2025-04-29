@@ -6,9 +6,9 @@
       "error",
       {
         "singleQuote": true,
-        "endOfLine": "auto"
-      }
-    ]
+        "endOfLine": "auto",
+      },
+    ],
   },
   "overrides": [
     // Configuration for TypeScript files
@@ -18,18 +18,18 @@
       "extends": [
         "airbnb-base",
         "airbnb-typescript/base",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
       ],
       "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
       },
       "rules": {
         "prettier/prettier": [
           "error",
           {
             "singleQuote": true,
-            "endOfLine": "auto"
-          }
+            "endOfLine": "auto",
+          },
         ],
         "import/extensions": [
           "error",
@@ -39,16 +39,22 @@
             "jsx": "never",
             "ts": "never",
             "tsx": "never",
-            "": "never"
-          }
+            "": "never",
+          },
         ], // Avoid missing file extension errors when using '@/' alias
         "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
+        "no-console": "off",
         "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+        "no-underscore-dangle": "off",
+        "no-param-reassign": "off",
+        "consistent-return": "off",
+        "no-promise-executor-return": "off",
+        "no-plusplus": "off",
         "no-restricted-syntax": [
           "error",
           "ForInStatement",
           "LabeledStatement",
-          "WithStatement"
+          "WithStatement",
         ], // Overrides Airbnb configuration and enable no-restricted-syntax
         "import/prefer-default-export": "off", // Named export is easier to refactor automatically
         "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
@@ -58,9 +64,9 @@
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { "argsIgnorePattern": "^_" }
-        ]
-      }
+          { "argsIgnorePattern": "^_" },
+        ],
+      },
     },
     // Configuration for testing
     {
@@ -68,11 +74,11 @@
       "plugins": ["jest", "jest-formatting"],
       "extends": [
         "plugin:jest/recommended",
-        "plugin:jest-formatting/recommended"
+        "plugin:jest-formatting/recommended",
       ],
       "rules": {
-        "jest/no-mocks-import": "off"
-      }
-    }
-  ]
+        "jest/no-mocks-import": "off",
+      },
+    },
+  ],
 }
